@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="profile">
+    <img src="./assets/profile.png" alt="default user" />
+    <h3>User Info:</h3>
+
+    <!-- READ ONLY MODE -->
+    <ng-container *ngIf="!isEditMode">
+      <div class="flex">
+        <p>Username:</p>
+        <p>{{profileDetails.username}}</p>
+      </div>
+      <div class="flex">
+        <p>Email:</p>
+        <p>{{profileDetails.email}}</p>
+      </div>
+      <div class="flex">
+        <p>Phone:</p>
+        <p>{{profileDetails.tel}}</p>
+      </div>
+      <button class="edit-button" (click)="toggleEditMode()">Edit</button>
+    </ng-container>
+
+    <!-- EDIT MODE -->
+    <ng-container *ngIf="isEditMode">
+      <form #form="ngForm" (ngSubmit)="editUserProfile()">
+        <div class="flex">
+          <p>Username:</p>
+          <input type="text" name="username" id="username" 
+          placeholder = {{profileDetails.username}}
+          value="text"
+          #username="ngModel"
+          ngModel
+          required
+          minlength="5" />
+        </div>
+        <ng-container *ngIf="username.touched">
+            <p class="error" *ngIf="username.errors?.['required']" style="color: red;">
+              Username is required!
+            </p>
+            <p class="error" *ngIf="username.errors?.['minlength']" style="color: red;">
+              Username must be at least 5 characters!
+            </p>
+          </ng-container>
+
+        
+        <div class="flex">
+          <p>Email:</p>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder={{profileDetails.email}}
+          #inputEmail="ngModel"
+          ngModel
+          required
+          [appEmail]="appEmailDomains"
+          />
+        </div>
+        <ng-container *ngIf="inputEmail.touched">
+            <p class="error" *ngIf="inputEmail.errors?.['required']" style="color: red;">
+              Email is required!
+            </p>
+            <p class="error" *ngIf="inputEmail.errors?.['appEmailValidator']" style="color: red;">
+              Email is not valid!
+            </p>
+          </ng-container>
+
+
+       
+        <div class="flex">
+          <p>Phone:</p>
+          <div>
+            <input
+            type="text"
+            name="tel"
+            id="tel"
+            placeholder={{profileDetails.tel}}
+            #inputTel="ngModel"
+            ngModel
+            pattern="^[0-9]+$"
+            minlength="10"
+          />
+          </div>
+          
+        </div>
+        <ng-container >
+            <p class="error" *ngIf="inputTel.errors?.['pattern']" style="color: red;">
+              Telephone is not valid!
+            </p>
+            <p class="error" *ngIf="inputTel.errors?.['minlength']" style="color: red;">
+              Telephone must be at least 10 numbers!
+            </p>
+          </ng-container>
+
+
+        <button class="red-button" (click)="toggleEditMode()">Cancel</button>
+        <button class="green-button" [style]="{ backgroundColor: form.invalid ? 'grey' : '#34495e' }"
+        [disabled]="form.invalid">Save</button>
+      </form>
+    </ng-container>
+  </div>
+</div>
