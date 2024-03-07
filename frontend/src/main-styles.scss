@@ -1,0 +1,43 @@
+//Global styles and change variable values
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700|Nunito:400,700");
+
+$turquoise: #44ddd0;
+$green: #27d7a1;
+$light-green: #45f69e;
+$light: #f8f8f8;
+$dark-green: rgb(0, 100, 80);
+
+//Update Bulma's global variables
+$family-sans-serife: "Nunito", "sans-serife";
+$primary: $green;
+
+$link: $light-green;
+
+//Update some of Bulma's component varianles
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+
+//Set custom global styles
+
+html {
+  background: #bccdd1;
+}
+button:hover {
+  border: 3px solid #1abc9c;
+  cursor: pointer;
+}
+.title {
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 20px 0 20px;
+  color: #ecf0f1;
+  text-shadow: 2px 2px 4px #000000;
+  font-family: "Cherry Swash", cursive;
+}
+
+// html, body{
+//     height: 100%;
+// }
