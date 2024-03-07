@@ -1,0 +1,154 @@
+<div class="container">
+  <form class="register" #form="ngForm" (ngSubmit)="register(form)">
+    <fieldset>
+      <h2>Registration Form</h2>
+
+      <!-- username -->
+      <p class="field field-icon">
+        <label for="username"
+          ><span><i class="fas fa-user"></i></span
+        ></label>
+        <input
+          class="input-error"
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Johny"
+          #inputUsername="ngModel"
+          ngModel
+          required
+          minlength="5"
+        />
+      </p>
+
+      <ng-container *ngIf="inputUsername.touched">
+        <p class="error" *ngIf="inputUsername.errors?.['required']">
+          Username is required!
+        </p>
+        <p class="error" *ngIf="inputUsername.errors?.['minlength']">
+          Username must be at least 5 characters!
+        </p>
+      </ng-container>
+
+      <!-- email -->
+      <p class="field field-icon">
+        <label for="email"
+          ><span><i class="fas fa-envelope"></i></span
+        ></label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="john.doe@gmail.com"
+          #inputEmail="ngModel"
+          ngModel
+          required
+          [appEmail]="appEmailDomains"
+        />
+      </p>
+
+      <ng-container *ngIf="inputEmail.touched">
+        <p class="error" *ngIf="inputEmail.errors?.['required']">
+          Email is required!
+        </p>
+        <p class="error" *ngIf="inputEmail.errors?.['appEmailValidator']">
+          Email is not valid!
+        </p>
+      </ng-container>
+
+      <!-- да показва грешките в реално време ако данните не са валидни -->
+      <!-- {{ inputEmail?.errors | json }} -->
+
+      <!-- telephone -->
+      <p class="field field-icon">
+        <label for="tel"><span><i class="fas fa-phone"></i></span></label>
+        <!-- <select name="select-tel" id="select-tel" class="tel">
+          <option value="00359">+359</option>
+        </select> -->
+        <input
+          type="text"
+          name="tel"
+          id="tel"
+          placeholder="0885888888"
+          #inputTel="ngModel"
+          ngModel
+          pattern="^[0-9]+$"
+          minlength="10"
+        />
+      </p>
+
+      <ng-container >
+        <p class="error" *ngIf="inputTel.errors?.['pattern']">
+          Telephone is not valid!
+        </p>
+        <p class="error" *ngIf="inputTel.errors?.['minlength']">
+          Telephone must be at least 10 numbers!
+        </p>
+      </ng-container>
+
+      <!-- password -->
+      <p class="field field-icon">
+        <label for="password"
+          ><span><i class="fas fa-lock"></i></span
+        ></label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="******"
+          #inputPassword="ngModel"
+          ngModel
+          required
+          minlength="5"
+        />
+      </p>
+
+      <ng-container *ngIf="inputPassword.touched">
+        <p class="error" *ngIf="inputPassword.errors?.['required']">
+          Password is required!
+        </p>
+        <p class="error" *ngIf="inputPassword.errors?.['minlength']">
+          Password must be at least 5 characters!
+        </p>
+      </ng-container>
+
+      <!-- rePassword -->
+      <p class="field field-icon">
+        <label for="rePassword"
+          ><span><i class="fas fa-lock"></i></span
+        ></label>
+        <input
+          type="password"
+          name="rePassword"
+          id="rePassword"
+          placeholder="******"
+          #inputRePassword="ngModel"
+          ngModel
+          required
+        />
+      </p>
+
+      <ng-container *ngIf="inputRePassword.touched">
+        <p class="error" *ngIf="inputRePassword.errors?.['required']">
+          Re Password is required!
+        </p>
+        <p class="error" *ngIf="inputPassword.value != inputRePassword.value">Repeat Password does not match password!</p>
+      </ng-container>
+
+      <!-- {{form.value | json}} -->
+
+      <button
+        [style]="{ backgroundColor: form.invalid ? 'grey' : '#34495e' }"
+        [disabled]="form.invalid"
+        class="create-account-btn"
+      >
+        Create Account
+      </button>
+
+      <p class="text-center">
+        Have an account?
+        <a routerLink="/login">Log In</a>
+      </p>
+    </fieldset>
+  </form>
+</div>
