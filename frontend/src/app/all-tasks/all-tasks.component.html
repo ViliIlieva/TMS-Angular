@@ -1,0 +1,67 @@
+ <main id="root">
+    <!-- <section id="form-section">
+      <form>
+        <fieldset>
+         <legend>
+          <input id="load-board-btn" type="button" value="Load Board" />
+         </legend>
+          <div class="form-control">
+            <input type="text" id="title" placeholder="Enter task title..." />
+           </div>
+           <div class="form-control">
+            <textarea id="description" placeholder="Enter task description..."></textarea>
+           </div>
+         <div class="form-control">
+           <input id="create-task-btn" type="button" value="Add Task">
+         </div>
+        </fieldset>
+       </form>
+    </section> -->
+    <section id="board-section">
+      <article id="todo-section">
+        <h1>ToDo</h1>
+        <ul class="task-list" *ngIf="toDoTasks?.length != 0">
+          <li class="task" *ngFor="let task of toDoTasks" >
+            <h3>{{task.taskName | slice: 20}}</h3>
+            <p>{{task.taskText}}</p>
+            <p>{{task.taskType}}</p>
+            <button>Move to In Progress</button>
+            <!-- <button  class="ass-button">Subscribe {{task.assignedTo}}</button> -->
+          </li>
+        </ul>
+      </article>
+      <article id="in-progress-section">
+        <h1>In Progress</h1>
+        <ul class="task-list" *ngIf="inProgressTasks?.length != 0">
+          <li class="task" *ngFor="let task of inProgressTasks">
+            <h3>{{task.taskName | slice: 20}}</h3>
+            <p>{{task.taskText}}</p>
+            <p>{{task.taskType}}</p>
+            <button>Move to Code Review</button>
+          </li>
+        </ul>
+      </article>
+      <article id="code-review-section">
+        <h1>Code Review</h1>
+        <ul class="task-list" *ngIf="codeReviewTasks?.length != 0">
+          <li class="task" *ngFor="let task of codeReviewTasks">
+            <h3>{{task.taskName | slice: 20}}</h3>
+            <p>{{task.taskText}}</p>
+            <p>{{task.taskType}}</p>
+            <button>Move to Done</button>
+          </li>
+        </ul>
+      </article>
+      <article id="done-section">
+        <h1>Done</h1>
+        <ul class="task-list" *ngIf="doneTasks?.length != 0">
+          <li class="task" *ngFor="let task of doneTasks">
+            <h3>{{task.taskName | slice : 20}}</h3>
+            <p>{{task.taskText}}</p>
+            <p>{{task.taskType}}</p>
+            <button>Close</button>
+          </li>
+        </ul>
+      </article>
+    </section>
+  </main>

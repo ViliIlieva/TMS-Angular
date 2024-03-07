@@ -1,0 +1,192 @@
+@import "../../main-styles.scss";
+
+ul,
+li {
+    padding: 0;
+    list-style: none;
+}
+
+textarea {
+    resize: none;
+}
+
+#root {
+    margin-top: 10px;
+}
+
+#board-section,
+.task-list {
+    display: flex;
+}
+
+#board-section {
+    justify-content: space-around;
+    padding: 16px;
+    margin-top: 48px;
+    
+}
+
+#todo-section,
+#in-progress-section,
+#code-review-section,
+#done-section {
+    position: relative;
+    width: 300px;
+    min-height: 500px;
+    padding: 5px 25px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+#todo-section > h1,
+#in-progress-section > h1,
+#code-review-section > h1,
+#done-section > h1 {
+    top: -75px;
+    border-radius: 10px;
+    position: absolute;
+    padding: 16px;
+    z-index: -1;
+    border: 1px solid black;
+    font-family: 'Dosis', sans-serif;
+    font-size: 24px;
+}
+
+#in-progress-section > h1,
+#code-review-section > h1 {
+    left: 100px;
+}
+
+#todo-section > h1,
+#done-section > h1 {
+    left: 120px;
+}
+
+#todo-section,
+#todo-section > h1 {
+    background-color: #049ef78b;
+    background-image: linear-gradient(343deg, #0093E9 0%, #80D0C7 100%);
+}
+
+#in-progress-section,
+#in-progress-section > h1 {
+    background-color: #85FFBD;
+    background-image: linear-gradient(353deg, #85FFBD 0%, #FFFB7D 100%);
+}
+
+#code-review-section,
+#code-review-section > h1 {
+    background-color: #FBAB7E;
+    background-image: linear-gradient(343deg, #FBAB7E 0%, #F7CE68 100%);
+}
+
+#done-section,
+#done-section > h1 {
+    background-color: #FF9A8B;
+    background-image: linear-gradient(343deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+}
+
+.task-list {
+    flex-direction: column;
+    gap: 8px;
+}
+
+.task {
+    border: 1px solid black;
+    padding: 8px;
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px;
+    transition: all .3s ease-in-out;
+}
+
+.task:hover {
+    box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+    transform: translate3d(0px, -1px, 0px);
+    border: none;
+}
+
+.task > button {
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#todo-section .task {
+    background-color: #80D0C7;
+}
+
+#in-progress-section .task {
+    background-color: #85FFBD;
+}
+
+#code-review-section .task {
+    background-color: #F7CE68;
+}
+
+#done-section .task {
+    background-color: #FF99AC;
+    text-decoration: line-through;
+}
+
+#form-section,
+#form-section > form > fieldset {
+    display: flex;
+}
+
+#form-section {
+    justify-content: center;
+    align-items: center;
+}
+
+#form-section > form > fieldset {
+    gap: 60px;
+    padding: 15px 30px;
+    border:3px solid #4238ca;
+    background:#f6f8ff;
+}
+
+#load-board-btn,
+#create-task-btn {
+    color: white;
+    background-color: #4238ca;
+    border: none;
+    outline: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: 'Dosis', sans-serif;
+}
+
+#load-board-btn:hover,
+#create-task-btn:hover {
+    color: #4238ca;
+    background: #f6f8ff;
+}
+
+.form-control input,
+.form-control textarea {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+  border: 2px solid rgb(142, 139, 139);
+  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+}
+
+.form-control input::placeholder,
+.form-control textarea::placeholder {
+    font-size: 18px;
+}
+
+#title {
+    height: 100%;
+}
+
+.ass-button{
+   margin-left: 30px;
+
+}
