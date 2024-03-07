@@ -1,0 +1,41 @@
+<div class="centered-content">
+  <div class="task-manager-container">
+    <div class="sidebar has-background-white">
+      <div class="task-list-container has-background-light">
+        <h1 class="title has-text-primary">Tasks</h1>
+
+        <div *ngIf="isLoading">
+            <app-loader />
+        </div>
+
+        <div *ngIf="!isLoading">
+        <a [routerLink]="task._taskId" *ngFor="let task of tasksList" class="task-list">
+          <table class="task">
+            <thead>
+              <tr>
+                <th>Task : {{task.taskName}}</th>
+                <!-- <th>Created : {{task.createdDate}}</th>
+                <th>Required by : {{task.requiredDate}}</th> -->
+                <th>Status : {{task.status}}</th>
+                <th>Type : {{task.taskType}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <p class="task-description">{{task.taskText}}</p>
+                <!-- <th class="sec-row">Assigned to : {{task.assignedTo}}</th> -->
+
+                <!-- <button class="button is-primary has-text-white comments-btn is-active"
+                            >
+                                All Comments
+                            </button> -->
+              </tr>
+            </tbody>
+          </table>
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
