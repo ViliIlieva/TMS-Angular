@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="welcome">
+        <h1>Welcome!</h1>
+        <p>Task managment System is a place, where you can organize your tasks and comment, to discuss problems, which
+            you have for your task.</p>
+        <div class="logged">
+            <ul *ngIf="!isLoged">
+                <li>
+                    <a routerLink="/login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/register">
+                        <i class="fas fa-user-plus"></i>
+                        Register
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>        
+</div>

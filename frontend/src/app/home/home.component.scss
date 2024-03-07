@@ -1,0 +1,51 @@
+/* welcome component */
+
+.welcome {
+    text-align: center;
+    width: 88%;
+    margin: 27px auto 0;
+    padding: 0.3em 0.5em;
+    border: 1px solid #999;
+    border-radius: 0.3em;
+    font: size 20px;;
+    margin-top: 1em;
+}
+
+.welcome h1 {
+    // background-color: #4ebced;
+    border-radius: 0.3em;
+    width: 90%;
+    padding: 0.3em 1em;
+}
+
+.welcome p {
+    padding: 1em;
+    border-bottom: 1px solid#34495e;
+    font-style: normal;
+    margin-bottom: 35px;
+}
+
+.welcome a {
+    color: white;
+    text-decoration: none;
+    background-color: #34495e;
+    border: none;
+    border-radius: 0.3em;
+    padding: 0.5em 5.2em;
+    margin: 1em;
+}
+
+.welcome a:hover {
+    cursor: pointer;
+}
+
+.welcome ul {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0;
+    margin: 1em;
+}
+
+.welcome li {
+    list-style: none;
+}
