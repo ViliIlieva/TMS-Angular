@@ -1,0 +1,23 @@
+<header>
+  <h1>Task Managment System</h1>
+
+  <nav>
+    <a routerLink="/home" class="list-menu-item">HOME</a>
+    <a routerLink="/tasks">ALL Tasks</a>
+    <a *ngIf="isLoggedIn" routerLink="/my-tasks">My Tasks</a>
+    <a *ngIf="isLoggedIn" routerLink="/add-task">New Task</a>
+
+    <div *ngIf="!isLoggedIn" class="topnav-right">
+      <a class="sec" routerLink="/register">Register</a>
+      <a class="sec" routerLink="/login">Login</a>
+    </div>
+
+    <div *ngIf="isLoggedIn" class="topnav-right">
+      <li class="sec">
+        <a class="long" routerLink="/profile">{{ username }}'s profile</a>
+      </li>
+      <li class="sec" (click)="logout()"><a>Logout</a></li>
+    </div>
+    <div class="animation start-home"></div>
+  </nav>
+</header>
