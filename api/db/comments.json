@@ -1,0 +1,23 @@
+[
+  {
+    "text": "Test open task comment",
+    "commentType": "ADVISORY",
+    "_taskId": "[{1q2w3e}]",
+    "_userId": "{t1y2u3}",
+    "_commentId": "00tyu"
+  },
+  {
+    "text": "Test open task comment",
+    "commentType": "ADVISORY",
+    "_taskId": "[{1q2w3e}]",
+    "_userId": "{t1y2u3}",
+    "_commentId": "01tyu"
+  },
+  {
+    "text": "Test open task comment",
+    "commentType": "ADVISORY",
+    "_taskId": "[{1q2w3e}]",
+    "_userId": "{t1y2u4}",
+    "_commentId": "02tyu"
+  }
+]
