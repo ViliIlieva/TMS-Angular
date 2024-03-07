@@ -34,30 +34,32 @@ export class ProfileComponent implements OnInit{
   form!: NgForm;
 
   ngOnInit(): void {
-    const {username, email, tel} = this.userService.user!;
+    const username = this.userService.user!.username;
+    const email = this.userService.user!.email;
+    const tel = this.userService.user!.tel;
     this.profileDetails= {
       username,
       email,
       tel,
     };
 
-    this.form.setValue({
-      username,
-      email,
-      tel,
-    })
+    // this.form.setValue({
+    //   username,
+    //   email,
+    //   tel,
+    // })
   }
 
   toggleEditMode(): void {
     this.isEditMode = !this.isEditMode;
   }
 
-  editUserProfile(): void {
-    if (this.form.invalid) {
+  editUserProfile(form: NgForm): void {
+    if (form.invalid) {
       return;
     }
 
-    this.profileDetails = { ...this.form.value } as Profile;
+    this.profileDetails = { ...form.value } as Profile;
     const { username, email, tel } = this.profileDetails;
     this.userService.editUserProfile(username, email, tel).subscribe(() => {
       this.toggleEditMode();

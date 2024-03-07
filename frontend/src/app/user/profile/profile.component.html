@@ -22,14 +22,12 @@
 
     <!-- EDIT MODE -->
     <ng-container *ngIf="isEditMode">
-      <form #form="ngForm" (ngSubmit)="editUserProfile()">
+      <form #form="ngForm" (ngSubmit)="editUserProfile(form)">
         <div class="flex">
           <p>Username:</p>
           <input type="text" name="username" id="username" 
-          placeholder = {{profileDetails.username}}
-          value="text"
           #username="ngModel"
-          ngModel
+          ngModel = {{profileDetails.username}}
           required
           minlength="5" />
         </div>
@@ -49,9 +47,8 @@
             type="email"
             name="email"
             id="email"
-            placeholder={{profileDetails.email}}
           #inputEmail="ngModel"
-          ngModel
+          ngModel ={{profileDetails.email}}
           required
           [appEmail]="appEmailDomains"
           />
@@ -74,9 +71,8 @@
             type="text"
             name="tel"
             id="tel"
-            placeholder={{profileDetails.tel}}
             #inputTel="ngModel"
-            ngModel
+            ngModel = {{profileDetails.tel}}
             pattern="^[0-9]+$"
             minlength="10"
           />
