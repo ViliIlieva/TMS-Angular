@@ -1,0 +1,134 @@
+<!-- <app-tasks-list /> -->
+
+<div id="current-container">
+  <!-- task -->
+  <div class="container" *ngIf="task">
+    <div class="centered-content">
+      <div class="task-manager-container">
+        <div class="sidebar has-background-white">
+          <div class="task-list-container has-background-light">
+            <div>
+              <a class="task-list">
+                <table class="task">
+                  <thead>
+                    <tr>
+                      <th>Task : {{ task.taskName }}</th>
+                      <th>Status : {{ task.status }}</th>
+                      <th>Type : {{ task.taskType }}</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <p class="task-description">{{ task.taskText }}</p>
+                      <!-- <th class="sec-row">
+                        Assigned to : {{ task.assignedTo }}
+                      </th> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- comments to task -->
+  <div class="centered-content">
+    <div class="comment-list-container has-background-light">
+      <h1 class="title has-text-primary">Comments</h1>
+
+      <!-- <div class="comment-header">
+        <div class="search">
+          <label for="site-search">Search: </label>
+          <input type="search" id="site-search" name="q" />
+          <button>Search</button>
+        </div>
+      </div> -->
+
+      <div *ngIf="thereAreNoComments">
+        <h3 class="title" style="color: grey">There are no comments</h3>
+      </div>
+
+      <div *ngIf="commentsList">
+        <table *ngFor="let comment of commentsByTaskId" class="task">
+          <tbody>
+            <tr>
+              <p class="task-description">{{ comment.text }}</p>
+            </tr>
+            <th class="sec-row">Comment Type : {{ comment.commentType }}</th>
+            <button class="button has-text-white">Edit</button>
+            <button class="button has-text-white comments-btn">Delete</button>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ADD NEW COMMENT -->
+      <div *ngIf="isLogged">
+        <h1 class="title">Add new Comment</h1>
+
+        <div class="modal-box">
+          <form #form="ngForm" (ngSubmit)="addComment(form)">
+            <div class="field is-grouped">
+              <p class="control is-expanded">
+                <input
+                  id="text"
+                  class="input has-background-light is-medium"
+                  #CommentInput
+                  type="text"
+                  name="comment"
+                  placeholder="Comment"
+                  #inputComment="ngModel"
+                  ngModel
+                  required
+                  minlength="10"
+                />
+              </p>
+
+              <ng-container *ngIf="inputComment.touched">
+                <p
+                  style="color: red"
+                  class="error"
+                  *ngIf="inputComment.errors?.['required']"
+                >
+                  The field with your comment is required.
+                </p>
+                <p
+                  style="color: red"
+                  class="error"
+                  *ngIf="inputComment.errors?.['minlength']"
+                >
+                  Username must be at least 10 characters!
+                </p>
+              </ng-container>
+
+              <div class="input control is-expanded">
+                <div class="select is-fullwidth">
+                  <label>Comment type : </label>
+                  <select name="type" class="has-background-light is-medium">
+                    <option #typeInpyt value="ADVISORY">ADVISORY</option>
+                    <option #typeInpyt value="EVALUATIVE">EVALUATIVE</option>
+                    <option #typeInpyt value="DISCRIPTIVE">DISCRIPTIVE</option>
+                  </select>
+                </div>
+              </div>
+
+              <p class="control">
+                <button>
+                <!-- class="submit-btn"
+                [style]="{
+                  backgroundColor: form.invalid ? 'grey' : '#34495e'
+                }"
+                disabled -->
+                  Submit
+                </button>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
