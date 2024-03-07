@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="new-theme-border">
+    <div class="header-background">
+      <span>New Task</span>
+    </div>
+
+    <form class="new-task" #form="ngForm" (ngSubmit)="addTask(form)">
+      <fieldset>
+        <!-- TASK NAME -->
+        <div class="new-theme-title">
+          <label for="taskName">Task name <span class="red">*</span></label>
+          <input
+            type="text"
+            name="taskName"
+            id="taskName"
+            #taskName="ngModel"
+            ngModel
+            required
+            minlength="5"
+          />
+
+          <ng-container *ngIf="taskName.touched">
+            <p class="error" *ngIf="taskName.errors?.['required']">
+              Task name is required.
+            </p>
+            <p class="error" *ngIf="taskName.errors?.['minlength']">
+              Task name must be at least 5 characters long.
+            </p>
+          </ng-container>
+        </div>
+
+        <!-- TASK TEXT -->
+        <div class="new-theme-content">
+          <label for="taskText">Description <span class="red">*</span></label>
+          <textarea
+            type="text"
+            name="taskText"
+            id="taskText"
+            rows="8"
+            class="height"
+            #taskText="ngModel"
+            ngModel
+            required
+            minlength="10"
+          ></textarea>
+
+          <ng-container *ngIf="taskText.touched">
+            <p class="error" *ngIf="taskText.errors?.['required']">
+              The field with your task is required.
+            </p>
+            <p class="error" *ngIf="taskText.errors?.['minlength']">
+              Task field must be at least 10 characters long.
+            </p>
+          </ng-container>
+        </div>
+
+        <div class="new-task-is-expanded">
+          <!-- TASK TYPE -->
+          <div class="input control">
+            <div class="label second">Task Type: *</div>
+            <div class="select is-fullwidth">
+              <select
+                name="taskType"
+                #taskType="ngModel"
+                ngModel
+                class="select has-background-light is-medium"
+              >
+                <option #taskType value="frontend">Frontend</option>
+                <option #taskType value="backend">Backend</option>
+                <option #taskType value="serverTask">Server Task</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- {{ form.value | json }} -->
+
+        <div class="new-theme-buttons">
+        <button
+          [style]="{ backgroundColor: form.invalid ? 'grey' : '#34495e' }"
+          [disabled]="form.invalid"
+          class="public"
+        >
+          ADD
+        </button>
+
+        <button routerLink="/home" class="cancel">Cancel</button>
+
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
