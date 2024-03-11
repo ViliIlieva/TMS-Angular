@@ -8,8 +8,12 @@
             <app-loader />
         </div>
 
+        <div *ngIf="thereAreNoTasks">
+          <h3 class="title" style="color: grey">There are no Tasks</h3>
+        </div>
+
         <div *ngIf="!isLoading">
-        <a [routerLink]="task._taskId" *ngFor="let task of tasksList" class="task-list">
+        <a [routerLink]="task._taskId" *ngFor="let task of tasksByUserId" class="task-list">
           <table class="task">
             <thead>
               <tr>

@@ -42,12 +42,6 @@ export class ProfileComponent implements OnInit{
       email,
       tel,
     };
-
-    // this.form.setValue({
-    //   username,
-    //   email,
-    //   tel,
-    // })
   }
 
   toggleEditMode(): void {

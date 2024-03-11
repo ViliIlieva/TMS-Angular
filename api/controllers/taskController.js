@@ -3,10 +3,8 @@ const { User } = require("../models/user.model");
 const { Task } = require("../models/taskModel");
 
 function getTasks(req, res, next) {
-  // const { _id: _userId } = req.user;
-
   Task.find()
-    .populate("_userId _commentId")
+    .populate("_commentId")
     .then((tasks) => res.json(tasks))
     .catch(next);
 }
@@ -17,6 +15,15 @@ function getTask(req, res, next) {
   Task.findById(_taskId)
     .populate("_userId _commentId")
     .then((task) => res.json(task))
+    .catch(next);
+}
+
+function getTasksByUserId(req, res, next) {
+  const { userId: _userId } = req.user;
+
+  Task.find()
+    .populate("_userId _commentId")
+    .then((tasks) => res.json(tasks))
     .catch(next);
 }
 
@@ -83,6 +90,7 @@ function subscribe(req, res, next) {
 module.exports = {
   getTasks,
   getTask,
+  getTasksByUserId,
   createTask,
   editTask,
   subscribe,
