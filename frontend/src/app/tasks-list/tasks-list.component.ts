@@ -25,8 +25,6 @@ export class TasksListComponent implements OnInit {
         this.tasksByUserId = this.tasksList.filter(
           (task) => task._userId === userId
         );
-        console.log(this.tasksList);
-        console.log(this.tasksByUserId);
         if (this.tasksByUserId.length === 0) {
           this.thereAreNoTasks = true;
         }

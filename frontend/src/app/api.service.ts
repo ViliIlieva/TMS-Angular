@@ -36,6 +36,13 @@ export class ApiService {
     });
   }
 
+  editTaskStatus(taskId: string, status: string){
+    console.log(taskId, status)
+    const { apiUrl } = environment;
+    return this.http
+    .put<Task>(`${apiUrl}/tasks`, {taskId, status});
+  }
+
   //COMMENTS
   getComments() {
     const { apiUrl } = environment;

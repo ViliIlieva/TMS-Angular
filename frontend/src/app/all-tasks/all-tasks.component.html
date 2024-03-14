@@ -23,9 +23,11 @@
         <ul class="task-list" *ngIf="toDoTasks?.length != 0">
           <li class="task" *ngFor="let task of toDoTasks" >
             <h3>{{task.taskName | slice: 20}}</h3>
-            <p>{{task.taskText}}</p>
+            <p>{{task.taskText | slice: 35}}</p>
             <p>{{task.taskType}}</p>
-            <button>Move to In Progress</button>
+            <button id="toDo" 
+            (click)="editTaskStatus(task._taskId, task.status)"
+            >Move to In Progress</button>
             <!-- <button  class="ass-button">Subscribe {{task.assignedTo}}</button> -->
           </li>
         </ul>
@@ -35,9 +37,11 @@
         <ul class="task-list" *ngIf="inProgressTasks?.length != 0">
           <li class="task" *ngFor="let task of inProgressTasks">
             <h3>{{task.taskName | slice: 20}}</h3>
-            <p>{{task.taskText}}</p>
+            <p>{{task.taskText | slice: 35}}</p>
             <p>{{task.taskType}}</p>
-            <button>Move to Code Review</button>
+            <button id="inProgress" 
+            (click)="editTaskStatus(task._taskId, task.status)"
+            >Move to Code Review</button>
           </li>
         </ul>
       </article>
@@ -45,10 +49,12 @@
         <h1>Code Review</h1>
         <ul class="task-list" *ngIf="codeReviewTasks?.length != 0">
           <li class="task" *ngFor="let task of codeReviewTasks">
-            <h3>{{task.taskName | slice: 20}}</h3>
-            <p>{{task.taskText}}</p>
+            <h3>{{task.taskName| slice: 20}}</h3>
+            <p>{{task.taskText | slice: 35}}</p>
             <p>{{task.taskType}}</p>
-            <button>Move to Done</button>
+            <button id="codeReview"
+            (click)="editTaskStatus(task._taskId, task.status)"
+            >Move to Done</button>
           </li>
         </ul>
       </article>
@@ -57,9 +63,11 @@
         <ul class="task-list" *ngIf="doneTasks?.length != 0">
           <li class="task" *ngFor="let task of doneTasks">
             <h3>{{task.taskName | slice : 20}}</h3>
-            <p>{{task.taskText}}</p>
+            <p>{{task.taskText | slice: 35}}</p>
             <p>{{task.taskType}}</p>
-            <button>Close</button>
+            <button id="done"
+            textBtn="done"
+            >Close</button>
           </li>
         </ul>
       </article>

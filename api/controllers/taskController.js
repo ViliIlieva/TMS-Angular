@@ -37,16 +37,26 @@ function createTask(req, res, next) {
   .catch(next);
   
 }
+function editTaskStatus(req, res, next){
+  
+  const { taskId, status} = req.body;
+
+  Task.findOneAndUpdate(
+    { _taskId: taskId },
+    {status }
+  )
+  .then((x) => {
+    res.status(200).json(x);
+  })
+  .catch(next);
+}
 
 function editTask(req, res, next) {
   const { taskId: _taskId } = req.params;
   const { taskName } = req.body.taskName;
-  const { createdDate } = req.body.createdDate;
-  const { requiredDate } = req.body.requiredDate;
-  const { description } = req.body.description;
+  const { taskText } = req.body.taskText;
   const { status } = req.body.status;
   const { taskType } = req.body.taskType;
-  const { nextActionDate } = req.body.nextActionDate;
   const { _id: _userId } = req.user;
 
   // if the userId is not the same as this one of the task, the task will not be updated
@@ -93,5 +103,6 @@ module.exports = {
   getTasksByUserId,
   createTask,
   editTask,
+  editTaskStatus,
   subscribe,
 };

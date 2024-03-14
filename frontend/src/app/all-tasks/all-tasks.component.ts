@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Task } from '../types/task';
 import { ApiService } from '../api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-tasks',
@@ -8,6 +9,7 @@ import { ApiService } from '../api.service';
   styleUrls: ['./all-tasks.component.scss'],
 })
 export class AllTasksComponent {
+
   allTasks: Task[] = [];
   toDoTasks: Task[] = [];
   inProgressTasks: Task[] = [];
@@ -17,7 +19,10 @@ export class AllTasksComponent {
   isLoading: boolean = true;
   isSubscribe = false;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService,
+     private activatedRout: ActivatedRoute,
+     private router: Router,
+     ) {}
 
   ngOnInit(): void {
     this.apiService.getTasks().subscribe({
@@ -36,5 +41,16 @@ export class AllTasksComponent {
         console.log(`Error: ${err}`);
       },
     });
+  }
+
+  editTaskStatus(taskId: string, status: string): void {
+      if (status === "toDo") {
+        status = "inProgress";
+      }else if (status === "inProgress") {
+        status = "codeReview";
+      }else if (status === "codeReview") {
+        status = "done";
+      }
+    this.apiService.editTaskStatus(taskId, status);
   }
 }

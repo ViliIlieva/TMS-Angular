@@ -6,11 +6,22 @@ const { taskController, commentController } = require("../controllers");
 // middleware that is specific to this router
 
 router.get("/", taskController.getTasks);
+
+router.put("/", auth(), taskController.editTaskStatus);
+
 router.post("/", taskController.createTask);
 
 router.get("/:taskId", taskController.getTask);
+
 router.post("/:taskId", auth(), commentController.createComment);
+
+
+
+
+
+
 router.put("/:taskId", auth(), taskController.subscribe);
+
 router.put(
   "/:taskId/comments/:commentId",
   auth(),
