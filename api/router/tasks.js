@@ -7,18 +7,13 @@ const { taskController, commentController } = require("../controllers");
 
 router.get("/", taskController.getTasks);
 
-router.put("/", auth(), taskController.editTaskStatus);
+router.put("/", taskController.editTaskStatus);
 
 router.post("/", taskController.createTask);
 
 router.get("/:taskId", taskController.getTask);
 
 router.post("/:taskId", auth(), commentController.createComment);
-
-
-
-
-
 
 router.put("/:taskId", auth(), taskController.subscribe);
 

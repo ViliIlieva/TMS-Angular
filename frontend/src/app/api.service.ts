@@ -40,7 +40,7 @@ export class ApiService {
     console.log(taskId, status)
     const { apiUrl } = environment;
     return this.http
-    .put<Task>(`${apiUrl}/tasks`, {taskId, status});
+    .put<Task>('/api/tasks', {taskId, status});
   }
 
   //COMMENTS

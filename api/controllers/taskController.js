@@ -38,7 +38,6 @@ function createTask(req, res, next) {
   
 }
 function editTaskStatus(req, res, next){
-  
   const { taskId, status} = req.body;
 
   Task.findOneAndUpdate(
