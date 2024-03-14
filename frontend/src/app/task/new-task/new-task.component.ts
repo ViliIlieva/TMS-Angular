@@ -24,9 +24,10 @@ export class NewTaskComponent {
 
     const { taskName, taskText, taskType } = form.value;
     const status = 'toDo';
+    const _userId = this.userService.user?._id;
     
     this.apiService
-      .createTask(taskName, taskText,status, taskType)
+      .createTask(taskName, taskText, status, taskType, _userId)
       .subscribe(() => {
         this.router.navigate(['/tasks']);
       });

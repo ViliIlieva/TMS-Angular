@@ -10,33 +10,25 @@ function getTasks(req, res, next) {
 }
 
 function getTask(req, res, next) {
-  const { taskId: _taskId } = req.params;
+  const { taskId: _id } = req.params;
 
-  Task.findById(_taskId)
+  Task.findById(_id)
     .populate("_userId _commentId")
     .then((task) => res.json(task))
     .catch(next);
 }
 
-function getTasksByUserId(req, res, next) {
-  const { userId: _userId } = req.user;
-
-  Task.find()
-    .populate("_userId _commentId")
-    .then((tasks) => res.json(tasks))
-    .catch(next);
-}
 
 function createTask(req, res, next) {
-  const { taskName, taskText, taskType } = req.body;
+  const { taskName, taskText, taskType, _userId } = req.body;
   const status = 'toDo';
   
-  return Task.create({taskName, taskText, status, taskType })
+  return Task.create({taskName, taskText, status, taskType, _userId })
   .then((task) => {
     res.status(200).send(task);})
   .catch(next);
-  
 }
+
 function editTaskStatus(req, res, next){
   const { taskId, status} = req.body;
 
@@ -99,7 +91,6 @@ function subscribe(req, res, next) {
 module.exports = {
   getTasks,
   getTask,
-  getTasksByUserId,
   createTask,
   editTask,
   editTaskStatus,

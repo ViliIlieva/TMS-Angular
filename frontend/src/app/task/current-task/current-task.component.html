@@ -1,5 +1,3 @@
-<!-- <app-tasks-list /> -->
-
 <div id="current-container">
   <!-- task -->
   <div class="container" *ngIf="task">
@@ -78,36 +76,40 @@
                   class="input has-background-light is-medium"
                   #CommentInput
                   type="text"
-                  name="comment"
-                  placeholder="Comment"
-                  #inputComment="ngModel"
+                  name="text"
+                  placeholder="Your comment"
+                  #text="ngModel"
                   ngModel
                   required
                   minlength="10"
                 />
               </p>
 
-              <ng-container *ngIf="inputComment.touched">
+              <ng-container *ngIf="text.touched">
                 <p
                   style="color: red"
                   class="error"
-                  *ngIf="inputComment.errors?.['required']"
+                  *ngIf="text.errors?.['required']"
                 >
                   The field with your comment is required.
                 </p>
                 <p
                   style="color: red"
                   class="error"
-                  *ngIf="inputComment.errors?.['minlength']"
+                  *ngIf="text.errors?.['minlength']"
                 >
-                  Username must be at least 10 characters!
+                  Comment text must be at least 10 characters!
                 </p>
               </ng-container>
 
               <div class="input control is-expanded">
                 <div class="select is-fullwidth">
                   <label>Comment type : </label>
-                  <select name="type" class="has-background-light is-medium">
+                  <select 
+                  name="commentType" 
+                  class="has-background-light is-medium"
+                  #commentType="ngModel"
+                  ngModel>
                     <option #typeInpyt value="ADVISORY">ADVISORY</option>
                     <option #typeInpyt value="EVALUATIVE">EVALUATIVE</option>
                     <option #typeInpyt value="DISCRIPTIVE">DISCRIPTIVE</option>
@@ -117,11 +119,6 @@
 
               <p class="control">
                 <button>
-                <!-- class="submit-btn"
-                [style]="{
-                  backgroundColor: form.invalid ? 'grey' : '#34495e'
-                }"
-                disabled -->
                   Submit
                 </button>
               </p>

@@ -56,8 +56,15 @@ export class CurrentTaskComponent implements OnInit {
   }
 
   addComment(form: NgForm): void {
-    const id = this.activatedRout.snapshot.params['taskId'];
-    // this.userService.register();
-    this.router.navigate(['/my-tasks']);
+    if (form.invalid) {
+      return;
+    }
+
+    const taskId = this.activatedRout.snapshot.params['taskId'];
+    const {text, commentType } = form.value;
+
+     this.apiService
+     .addComment(taskId, text, commentType);
+    this.router.navigate([`/my-tasks/${taskId}`]);
   }
 }

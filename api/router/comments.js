@@ -6,4 +6,6 @@ const { commentController } = require("../controllers");
 
 router.get("/", commentController.getComments);
 
+router.post("/:taskId", commentController.createComment);
+
 module.exports = router;

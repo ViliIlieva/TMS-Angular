@@ -13,19 +13,19 @@ router.post("/", taskController.createTask);
 
 router.get("/:taskId", taskController.getTask);
 
-router.post("/:taskId", auth(), commentController.createComment);
+// router.post("/:taskId", auth(), commentController.createComment);
 
-router.put("/:taskId", auth(), taskController.subscribe);
+// router.put("/:taskId", auth(), taskController.subscribe);
 
-router.put(
-  "/:taskId/comments/:commentId",
-  auth(),
-  commentController.editComment,
-);
-router.delete(
-  "/:taskId/comments/:commentId",
-  auth(),
-  commentController.deleteComment,
-);
+// router.put(
+//   "/:taskId/comments/:commentId",
+//   auth(),
+//   commentController.editComment,
+// );
+// router.delete(
+//   "/:taskId/comments/:commentId",
+//   auth(),
+//   commentController.deleteComment,
+// );
 
 module.exports = router;

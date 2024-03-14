@@ -26,6 +26,7 @@ export class ApiService {
     taskText: string,
     status: string,
     taskType: string,
+    _userId: string,
   ) {
     const { apiUrl } = environment;
     return this.http.post<Task>(`${apiUrl}/tasks`, {
@@ -33,6 +34,21 @@ export class ApiService {
       taskText,
       status,
       taskType,
+      _userId,
+    });
+  }
+
+  addComment(
+    taskId: string,
+    text: string,
+    commentType: string,
+  ) {
+    const { apiUrl } = environment;
+    return this.http
+    .post<Comment>(`${apiUrl}/tasks/${taskId}`, {
+      taskId,
+      text,
+      commentType,
     });
   }
 
