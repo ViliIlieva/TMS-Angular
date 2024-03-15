@@ -26,7 +26,7 @@
             <p>{{task.taskText | slice: 35}}</p>
             <p>{{task.taskType}}</p>
             <button id="toDo" 
-            (click)="editTaskStatus(task._taskId, task.status)"
+            (click)="editTaskStatus(task._id, task.status)"
             >Move to In Progress</button>
             <!-- <button  class="ass-button">Subscribe {{task.assignedTo}}</button> -->
           </li>
@@ -40,7 +40,7 @@
             <p>{{task.taskText | slice: 35}}</p>
             <p>{{task.taskType}}</p>
             <button id="inProgress" 
-            (click)="editTaskStatus(task._taskId, task.status)"
+            (click)="editTaskStatus(task._id, task.status)"
             >Move to Code Review</button>
           </li>
         </ul>
@@ -53,7 +53,7 @@
             <p>{{task.taskText | slice: 35}}</p>
             <p>{{task.taskType}}</p>
             <button id="codeReview"
-            (click)="editTaskStatus(task._taskId, task.status)"
+            (click)="editTaskStatus(task._id, task.status)"
             >Move to Done</button>
           </li>
         </ul>

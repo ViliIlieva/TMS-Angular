@@ -2,21 +2,11 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = Number(process.env.SALTROUNDS) || 5;
 
-const { ObjectId } = mongoose.Schema.Types;
-
 const userSchema = new mongoose.Schema({
   _userId: {
     type: mongoose.Schema.Types.ObjectId,
     require: true,
   },
-  tasks: [{
-    type: ObjectId,
-    ref: "Task"
-  }],
-  comments: [{
-    type: ObjectId,
-    ref: "Comment"
-  }],
   username: {
     type: String,
     required: true,

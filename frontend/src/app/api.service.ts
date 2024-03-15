@@ -29,7 +29,8 @@ export class ApiService {
     _userId: string,
   ) {
     const { apiUrl } = environment;
-    return this.http.post<Task>(`${apiUrl}/tasks`, {
+    return this.http
+    .post<Task>(`${apiUrl}/tasks`, {
       taskName,
       taskText,
       status,
@@ -39,16 +40,18 @@ export class ApiService {
   }
 
   addComment(
-    taskId: string,
+    _taskId: string,
     text: string,
     commentType: string,
+    _userId: string,
   ) {
     const { apiUrl } = environment;
     return this.http
-    .post<Comment>(`${apiUrl}/tasks/${taskId}`, {
-      taskId,
+    .post<Comment>(`${apiUrl}/tasks/${_taskId}`, {
+      _taskId,
       text,
       commentType,
+      _userId,
     });
   }
 

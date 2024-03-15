@@ -10,7 +10,7 @@ function getTasks(req, res, next) {
 }
 
 function getTask(req, res, next) {
-  const { taskId: _id } = req.params;
+  const { _id: _id } = req.params;
 
   Task.findById(_id)
     .populate("_userId _commentId")

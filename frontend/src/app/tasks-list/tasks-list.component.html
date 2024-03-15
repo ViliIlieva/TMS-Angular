@@ -13,7 +13,7 @@
         </div>
 
         <div *ngIf="!isLoading">
-        <a [routerLink]="task._taskId" *ngFor="let task of tasksByUserId" class="task-list">
+        <a [routerLink]="task._id" *ngFor="let task of tasksByUserId" class="task-list">
           <table class="task">
             <thead>
               <tr>

@@ -34,20 +34,20 @@ export class CurrentTaskComponent implements OnInit {
   }
 
   fetchTask(): void {
-    const id = this.activatedRout.snapshot.params['taskId'];
+    const _id = this.activatedRout.snapshot.params['taskId'];
 
-    this.apiService.getTask(id).subscribe((task) => {
+    this.apiService.getTask(_id).subscribe((task) => {
       this.task = task;
     });
   }
 
   fetchComments(): void {
-    const id = this.activatedRout.snapshot.params['taskId'];
+    const _id = this.activatedRout.snapshot.params['taskId'];
 
     this.apiService.getComments().subscribe((comments) => {
       this.commentsList = comments;
       this.commentsByTaskId = this.commentsList.filter(
-        (comment) => comment._taskId === id,
+        (comment) => comment._taskId === _id,
       );
       if (this.commentsByTaskId.length === 0) {
         this.thereAreNoComments = true;
@@ -60,11 +60,12 @@ export class CurrentTaskComponent implements OnInit {
       return;
     }
 
-    const taskId = this.activatedRout.snapshot.params['taskId'];
+    const _taskId = this.activatedRout.snapshot.params['taskId'];
     const {text, commentType } = form.value;
+    const _userId = this.userService.user?._id;
 
      this.apiService
-     .addComment(taskId, text, commentType);
-    this.router.navigate([`/my-tasks/${taskId}`]);
+     .addComment(_taskId, text, commentType, _userId);
+    this.router.navigate([`/my-tasks/${_taskId}`]);
   }
 }

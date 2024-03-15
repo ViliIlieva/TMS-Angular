@@ -4,7 +4,7 @@ export interface Task {
   status: string;
   taskType: string;
   comments: string[] | Comment[];
-  _taskId: string;
+  _id: string;
   taskName: string;
   taskText: string;
   _userId: string;

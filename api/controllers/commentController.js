@@ -48,69 +48,85 @@ function getComments(req, res, next) {
 
 function createComment(req, res, next) {
   const { taskId: _taskId } = req.params;
-  const { _id: _userId } = req.user;
-  const { dateAdded, text, commentType, reminderDate } = req.body;
+  const { text, commentType, _userId } = req.body;
 
-  newComment(dateAdded, text, commentType, reminderDate, _userId, _taskId)
-    .then(([_, updatedTask]) => res.status(200).json(updatedTask))
-    .catch(next);
+  
+  //   .then(([_, updatedTask]) => res.status(200).json(updatedTask))
+  //   .catch(next);
+
+    return Comment.create({
+      text, commentType, _userId, _taskId
+    }).then((comment) => {
+      return Promise.all([
+        User.updateOne(
+          { _id: _userId },
+          { $push: { comments: comment._id }, $addToSet: { tasks: _taskId } },
+        ),
+        Task.findByIdAndUpdate(
+          { _id: _taskId },
+          {
+            $push: { comments: comment._id },
+            $addToSet: { assignedTo: _userId },
+          },
+          { new: true },
+        ),
+      ]);
+    });
 }
 
-function editComment(req, res, next) {
-  const { commentId: _commentId } = req.params;
-  const { dateAdded, text, commentType, reminderDate } = req.body;
-  const { _id: _userId } = req.user;
+// function editComment(req, res, next) {
+//   const { commentId: _commentId } = req.params;
+//   const { dateAdded, text, commentType, reminderDate } = req.body;
+//   const { _id: _userId } = req.user;
 
-  // if the userId is not the same as this one of the comment, the comment will not be updated
-  Comment.findOneAndUpdate(
-    { _id: _commentId, userId: _userId },
-    {
-      dateAdded: dateAdded,
-      text: text,
-      commentType: commentType,
-      reminderDate: reminderDate,
-    },
-    { new: true },
-  )
-    .then((updatedComment) => {
-      if (updatedComment) {
-        res.status(200).json(updatedComment);
-      } else {
-        res.status(401).json({ message: `Not allowed!` });
-      }
-    })
-    .catch(next);
-}
+//   // if the userId is not the same as this one of the comment, the comment will not be updated
+//   Comment.findOneAndUpdate(
+//     { _id: _commentId, userId: _userId },
+//     {
+//       dateAdded: dateAdded,
+//       text: text,
+//       commentType: commentType,
+//       reminderDate: reminderDate,
+//     },
+//     { new: true },
+//   )
+//     .then((updatedComment) => {
+//       if (updatedComment) {
+//         res.status(200).json(updatedComment);
+//       } else {
+//         res.status(401).json({ message: `Not allowed!` });
+//       }
+//     })
+//     .catch(next);
+// }
 
-function deleteComment(req, res, next) {
-  const { _commentId, _taskId } = req.params;
-  const { _id: userId } = req.user;
+// function deleteComment(req, res, next) {
+//   const { _commentId, _taskId } = req.params;
+//   const { _id: userId } = req.user;
 
-  Promise.all([
-    Comment.findOneAndDelete({ _id: _commentId, _userId }),
-    User.findOneAndUpdate(
-      { _id: _userId },
-      { $pull: { comments: _commentId } },
-    ),
-    Task.findOneAndUpdate(
-      { _id: _taskId },
-      { $pull: { comments: _commentId } },
-    ),
-  ])
-    .then(([deletedOne, _, __]) => {
-      if (deletedOne) {
-        res.status(200).json(deletedOne);
-      } else {
-        res.status(401).json({ message: `Not allowed!` });
-      }
-    })
-    .catch(next);
-}
+//   Promise.all([
+//     Comment.findOneAndDelete({ _id: _commentId, _userId }),
+//     User.findOneAndUpdate(
+//       { _id: _userId },
+//       { $pull: { comments: _commentId } },
+//     ),
+//     Task.findOneAndUpdate(
+//       { _id: _taskId },
+//       { $pull: { comments: _commentId } },
+//     ),
+//   ])
+//     .then(([deletedOne, _, __]) => {
+//       if (deletedOne) {
+//         res.status(200).json(deletedOne);
+//       } else {
+//         res.status(401).json({ message: `Not allowed!` });
+//       }
+//     })
+//     .catch(next);
+// }
 
 module.exports = {
   newComment,
   getComments,
   createComment,
-  editComment,
-  deleteComment,
 };

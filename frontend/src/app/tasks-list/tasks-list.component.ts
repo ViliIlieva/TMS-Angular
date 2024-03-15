@@ -17,13 +17,13 @@ export class TasksListComponent implements OnInit {
   constructor(private apiService: ApiService, private userService: UserService) {}
 
   ngOnInit(): void {
-    const userId = this.userService.user!._id;
+    const _userId = this.userService.user!._id;
 
     this.apiService.getTasks().subscribe({
       next: (tasks) => {
         this.tasksList = tasks;
         this.tasksByUserId = this.tasksList.filter(
-          (task) => task._userId === userId
+          (task) => task._userId === _userId
         );
         if (this.tasksByUserId.length === 0) {
           this.thereAreNoTasks = true;
