@@ -35,7 +35,7 @@ export class CurrentTaskComponent implements OnInit {
 
   fetchTask(): void {
     const _id = this.activatedRout.snapshot.params['taskId'];
-
+    
     this.apiService.getTask(_id).subscribe((task) => {
       this.task = task;
     });
