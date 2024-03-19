@@ -1,47 +1,40 @@
 [
   {
     "taskName": "Test open task",
-    "description": "Test open task",
+    "taskText": "Test open task",
     "status": "toDo",
-    "taskType": "frontend",
-    "comments": "[{00tyu}, {01tyu}, {02tyu}]",
-    "_taskId": "1q2w3e"
+    "taskType": "frontend"
   },
   {
     "taskName": "Test closed task",
-    "description": "Test closed task",
+    "taskText": "Test closed task",
     "status": "done",
     "taskType": "frontend",
-    "_userId": "[{t1y2u4}]",
-    "_taskId": "2q2w3e"
+    "_userId": "65c208629e3dd12a9875f14d"
   },
   {
     "taskName": "Test in progres task",
-    "description": "Test in progress",
+    "taskText": "Test in progress",
     "status": "inProgress",
     "taskType": "frontend",
-    "_userId": "[{t1y2u3}]",
-    "_taskId": "3q2w3e"
+    "_userId": "65c208629e3dd12a9875f14d"
   },
   {
     "taskName": "Test 2022 - 1 task",
-    "description": "Test 2022 - 1",
+    "taskText": "Test 2022 - 1",
     "status": "toDo",
-    "taskType": "serverTask",
-    "_taskId": "4q2w3e"
+    "taskType": "serverTask"
   },
   {
     "taskName": "Test 2022 - 2 task",
-    "description": "Test 2022 - 2",
+    "taskText": "Test 2022 - 2",
     "status": "close",
-    "taskType": "beckend",
-    "_taskId": "5q2w3e"
+    "taskType": "beckend"
   },
   {
     "taskName": "Test 2022 - 3 task without next action date",
-    "description": "Test 2022 - 3 without next action date",
+    "taskText": "Test 2022 - 3 without next action date",
     "status": "codeReview",
-    "taskType": "frontend",
-    "_taskId": "6q2w3e"
+    "taskType": "frontend"
   }
 ]

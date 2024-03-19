@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Task } from 'src/app/types/task';
 import { Comment } from 'src/app/types/comment';
+import { NewTask } from './types/new-task';
 
 @Injectable({
   providedIn: 'root',
@@ -30,27 +31,11 @@ export class ApiService {
   ) {
     const { apiUrl } = environment;
     return this.http
-    .post<Task>(`${apiUrl}/tasks`, {
+    .post<NewTask>(`${apiUrl}/tasks`, {
       taskName,
       taskText,
       status,
       taskType,
-      _userId,
-    });
-  }
-
-  addComment(
-    _taskId: string,
-    text: string,
-    commentType: string,
-    _userId: string,
-  ) {
-    const { apiUrl } = environment;
-    return this.http
-    .post<Comment>(`${apiUrl}/tasks/${_taskId}`, {
-      _taskId,
-      text,
-      commentType,
       _userId,
     });
   }
@@ -66,5 +51,21 @@ export class ApiService {
   getComments() {
     const { apiUrl } = environment;
     return this.http.get<Comment[]>(`${apiUrl}/comments`);
+  }
+
+  addComment(
+    _taskId: string,
+    _userId: string,
+    text: string,
+    commentType: string,
+  ) {
+    const { apiUrl } = environment;
+    return this.http
+    .post<Comment>(`${apiUrl}/comments`, {
+      _taskId,
+      _userId,
+      text,
+      commentType,
+    });
   }
 }

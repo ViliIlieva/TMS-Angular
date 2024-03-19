@@ -61,11 +61,11 @@ export class CurrentTaskComponent implements OnInit {
     }
 
     const _taskId = this.activatedRout.snapshot.params['taskId'];
-    const {text, commentType } = form.value;
     const _userId = this.userService.user?._id;
+    const {text, commentType } = form.value;
 
      this.apiService
-     .addComment(_taskId, text, commentType, _userId);
-    this.router.navigate([`/my-tasks/${_taskId}`]);
+     .addComment(_taskId, text, commentType, _userId).subscribe();
+    // this.router.navigate([`/my-tasks/${_taskId}`]);
   }
 }

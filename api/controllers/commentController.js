@@ -1,77 +1,22 @@
-const { User } = require("../models/user.model");
-const { Task } = require("../models/taskModel");
 const { Comment } = require("../models/comment.model");
 
-function newComment(
-  dateAdded,
-  text,
-  commentType,
-  _taskId,
-  _userId,
-  reminderDate,
-) {
-  return Comment.create({
-    dateAdded,
-    text,
-    commentType,
-    taskId: _taskId,
-    userId: _userId,
-    reminderDate,
-  }).then((comment) => {
-    return Promise.all([
-      User.updateOne(
-        { _id: _userId },
-        { $push: { comments: comment._id }, $addToSet: { tasks: _taskId } },
-      ),
-      Task.findByIdAndUpdate(
-        { _id: _taskId },
-        {
-          $push: { comments: comment._id },
-          $addToSet: { assignedTo: _userId },
-        },
-        { new: true },
-      ),
-    ]);
-  });
-}
-
 function getComments(req, res, next) {
-  // const limit = Number(req.query.limit) || 0;
 
   Comment.find()
-    // .limit(limit)
-    // .populate("_taskId _userId")
     .then((comments) => res.json(comments))
     .catch(next);
 }
 
 
 function createComment(req, res, next) {
-  const { taskId: _taskId } = req.params;
-  const { text, commentType, _userId } = req.body;
+  // const { taskId: _taskId } = req.params;
+  const { _taskId, text, commentType, _userId } = req.body;
+  console.log(_taskId,_userId, text, commentType );
 
-  
-  //   .then(([_, updatedTask]) => res.status(200).json(updatedTask))
-  //   .catch(next);
-
-    return Comment.create({
-      text, commentType, _userId, _taskId
-    }).then((comment) => {
-      return Promise.all([
-        User.updateOne(
-          { _id: _userId },
-          { $push: { comments: comment._id }, $addToSet: { tasks: _taskId } },
-        ),
-        Task.findByIdAndUpdate(
-          { _id: _taskId },
-          {
-            $push: { comments: comment._id },
-            $addToSet: { assignedTo: _userId },
-          },
-          { new: true },
-        ),
-      ]);
-    });
+    return Comment.create({text, commentType, _userId, _taskId})
+    .then((comment) => {
+      res.status(200).send(comment);})
+      .catch(next);
 }
 
 // function editComment(req, res, next) {
@@ -126,7 +71,6 @@ function createComment(req, res, next) {
 // }
 
 module.exports = {
-  newComment,
   getComments,
   createComment,
 };

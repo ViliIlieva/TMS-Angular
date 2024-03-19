@@ -3,10 +3,6 @@ const bcrypt = require("bcrypt");
 const saltRounds = Number(process.env.SALTROUNDS) || 5;
 
 const userSchema = new mongoose.Schema({
-  _userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    require: true,
-  },
   username: {
     type: String,
     required: true,

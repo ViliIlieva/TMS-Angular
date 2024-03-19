@@ -1,7 +1,6 @@
 import{Comment} from './comment';
 
-export interface Task {
-  _id: any;
+export interface NewTask {
   taskName: string;
   taskText: string;
   status: string;

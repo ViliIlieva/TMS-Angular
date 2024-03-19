@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema.Types;
 
 const TaskSchema = new mongoose.Schema({
-  _taskId: {
-    type: mongoose.Schema.Types.ObjectId,
-    unique: true
-  },
   taskName: {
     type: String,
     required: true,
@@ -29,12 +24,11 @@ const TaskSchema = new mongoose.Schema({
   },
   _userId:{
     type: String
-  },
-  comments: [{
-    type: ObjectId,
-        ref: "Comment"
-  }],
-});
+  }
+}, 
+{
+  versionKey: false}
+);
 
 const Task = mongoose.model("Task", TaskSchema);
 
