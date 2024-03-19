@@ -58,6 +58,12 @@ export class ApiService {
     const { apiUrl } = environment;
     return this.http.get<Comment[]>(`${apiUrl}/comments`);
   }
+  deleteComment(id: string) {
+    const { apiUrl } = environment;
+    return this.http
+    .delete(`/api/comments/${id}`)
+    .subscribe();
+  }
 
   addComment(
     _taskId: string,

@@ -41,10 +41,10 @@ export class CurrentTaskComponent implements OnInit {
     });
   }
 
-  fetchComments(): void {
+  async fetchComments(): Promise<void> {
     const _id = this.activatedRout.snapshot.params['taskId'];
 
-    this.apiService.getComments().subscribe((comments) => {
+    await this.apiService.getComments().subscribe((comments) => {
       this.commentsList = comments;
       this.commentsByTaskId = this.commentsList.filter(
         (comment) => comment._taskId === _id,
@@ -55,9 +55,17 @@ export class CurrentTaskComponent implements OnInit {
     });
   }
 
-  delete(): void {
+  // TASKS
+  deleteTask(): void {
     const _id = this.activatedRout.snapshot.params['taskId'];
     this.apiService.deleteTask(_id);
+    this.router.navigate([`/my-tasks`]);
+  }
+
+
+  //COMMENTS
+  deleteComment(id: string): void {
+    this.apiService.deleteComment(id);
     this.router.navigate([`/my-tasks`]);
   }
 
@@ -73,5 +81,9 @@ export class CurrentTaskComponent implements OnInit {
      this.apiService
      .addComment(_taskId, text, commentType, _userId).subscribe();
     // this.router.navigate([`/my-tasks/${_taskId}`]);
+  }
+
+  navigateToCurrentTask(taskId: string): void {
+    this.router.navigate([`/my-tasks/${taskId}`]);
   }
 }

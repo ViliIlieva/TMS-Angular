@@ -7,6 +7,14 @@ function getComments(req, res, next) {
     .catch(next);
 }
 
+function deleteComment(req, res, next) {
+  const {commentId: _id} = req.params;
+     Comment.findOneAndDelete({_id})
+     .then((removedComment) => {
+        res.status(200).send(removedComment);})
+    .catch(next);
+}
+
 
 function createComment(req, res, next) {
   // const { taskId: _taskId } = req.params;
@@ -72,5 +80,6 @@ function createComment(req, res, next) {
 
 module.exports = {
   getComments,
+  deleteComment,
   createComment,
 };

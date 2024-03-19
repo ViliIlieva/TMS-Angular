@@ -15,7 +15,7 @@ router.get("/:taskId", taskController.getTask);
 
 router.post(`/:taskId`, commentController.createComment);
 
-router.delete("/:taskId", taskController.deleteTask,);
+router.delete("/:taskId", taskController.deleteTask);
 
 // router.post("/:taskId", auth(), commentController.createComment);
 

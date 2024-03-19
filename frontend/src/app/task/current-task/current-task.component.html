@@ -1,3 +1,4 @@
+
 <div id="current-container">
   <!-- task -->
   <div class="container" *ngIf="task">
@@ -20,7 +21,7 @@
                     <tr>
                       <p class="task-description">{{ task.taskText }}</p>
                       <button class="button has-text-white comments-btn"
-                      (click)="delete()"> Delete Task </button>
+                      (click)="deleteTask()"> Delete Task </button>
                       <!-- <th class="sec-row">
                         Assigned to : {{ task.assignedTo }}
                       </th> -->
@@ -60,7 +61,10 @@
             </tr>
             <th class="sec-row">Comment Type : {{ comment.commentType }}</th>
             <button class="button has-text-white">Edit</button>
-            <button class="button has-text-white comments-btn">Delete</button>
+            <button class="button has-text-white comments-btn" 
+            (click)="deleteComment(comment._id)">
+            Delete
+          </button>
           </tbody>
         </table>
       </div>
@@ -131,3 +135,4 @@
     </div>
   </div>
 </div>
+
