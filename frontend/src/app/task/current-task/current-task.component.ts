@@ -55,6 +55,12 @@ export class CurrentTaskComponent implements OnInit {
     });
   }
 
+  delete(): void {
+    const _id = this.activatedRout.snapshot.params['taskId'];
+    this.apiService.deleteTask(_id);
+    this.router.navigate([`/my-tasks`]);
+  }
+
   addComment(form: NgForm): void {
     if (form.invalid) {
       return;

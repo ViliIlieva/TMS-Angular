@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Task } from 'src/app/types/task';
 import { Comment } from 'src/app/types/comment';
-import { NewTask } from './types/new-task';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +30,7 @@ export class ApiService {
   ) {
     const { apiUrl } = environment;
     return this.http
-    .post<NewTask>(`${apiUrl}/tasks`, {
+    .post<Task>(`${apiUrl}/tasks`, {
       taskName,
       taskText,
       status,
@@ -45,6 +44,13 @@ export class ApiService {
     const { apiUrl } = environment;
     return this.http
     .put<Task>('/api/tasks', {taskId, status});
+  }
+
+  deleteTask(taskId: string){
+    const { apiUrl } = environment;
+    return this.http
+    .delete(`/api/tasks/${taskId}`)
+    .subscribe();
   }
 
   //COMMENTS

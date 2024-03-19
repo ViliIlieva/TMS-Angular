@@ -41,6 +41,15 @@ function editTaskStatus(req, res, next){
   .catch(next);
 }
 
+function deleteTask(req, res, next) {
+  const {taskId: _id} = req.params;
+  console.log(_id)
+     Task.findOneAndDelete({_id})
+     .then((removedTask) => {
+        res.status(200).send(removedTask);})
+    .catch(next);
+}
+
 // function editTask(req, res, next) {
 //   const { taskId: _taskId } = req.params;
 //   const { taskName } = req.body.taskName;
@@ -92,4 +101,5 @@ module.exports = {
   getTask,
   createTask,
   editTaskStatus,
+  deleteTask
 };

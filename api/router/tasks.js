@@ -15,6 +15,8 @@ router.get("/:taskId", taskController.getTask);
 
 router.post(`/:taskId`, commentController.createComment);
 
+router.delete("/:taskId", taskController.deleteTask,);
+
 // router.post("/:taskId", auth(), commentController.createComment);
 
 // router.put("/:taskId", auth(), taskController.subscribe);
@@ -24,10 +26,6 @@ router.post(`/:taskId`, commentController.createComment);
 //   auth(),
 //   commentController.editComment,
 // );
-// router.delete(
-//   "/:taskId/comments/:commentId",
-//   auth(),
-//   commentController.deleteComment,
-// );
+
 
 module.exports = router;

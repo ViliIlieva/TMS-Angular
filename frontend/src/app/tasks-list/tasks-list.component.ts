@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Task } from 'src/app/types/task';
 import { UserService } from '../user/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tasks-list',
@@ -14,7 +15,8 @@ export class TasksListComponent implements OnInit {
   thereAreNoTasks: boolean = false;
   isLoading: boolean = true;
 
-  constructor(private apiService: ApiService, private userService: UserService) {}
+  constructor(private apiService: ApiService, private userService: UserService,  private activatedRout: ActivatedRoute,) {}
+ 
 
   ngOnInit(): void {
     const _userId = this.userService.user!._id;

@@ -19,6 +19,8 @@
                   <tbody>
                     <tr>
                       <p class="task-description">{{ task.taskText }}</p>
+                      <button class="button has-text-white comments-btn"
+                      (click)="delete()"> Delete Task </button>
                       <!-- <th class="sec-row">
                         Assigned to : {{ task.assignedTo }}
                       </th> -->
