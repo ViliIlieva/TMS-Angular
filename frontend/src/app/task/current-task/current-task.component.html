@@ -2,6 +2,7 @@
 <div id="current-container">
   <!-- task -->
   <div class="container" *ngIf="task">
+    <h1 class="title has-text-primary">Current Task</h1>
     <div class="centered-content">
       <div class="task-manager-container">
         <div class="sidebar has-background-white">
@@ -39,15 +40,8 @@
   <!-- comments to task -->
   <div class="centered-content">
     <div class="comment-list-container has-background-light">
+      <ng-container *ngIf="!isEditMode">
       <h1 class="title has-text-primary" *ngIf="!thereAreNoComments">Comments</h1>
-
-      <!-- <div class="comment-header">
-        <div class="search">
-          <label for="site-search">Search: </label>
-          <input type="search" id="site-search" name="q" />
-          <button>Search</button>
-        </div>
-      </div> -->
 
       <div *ngIf="thereAreNoComments">
         <h3 class="title" style="color: grey">There are no comments</h3>
@@ -60,7 +54,7 @@
               <p class="task-description">{{ comment.text }}</p>
             </tr>
             <th class="sec-row">Comment Type : {{ comment.commentType }}</th>
-            <button class="button has-text-white">Edit</button>
+            <button class="button has-text-white" (click)="toggleEditMode(comment._id)">Edit</button>
             <button class="button has-text-white comments-btn" 
             (click)="deleteComment(comment._id)">
             Delete
@@ -68,13 +62,65 @@
           </tbody>
         </table>
       </div>
+    </ng-container>
+
+    <!-- EDIT MODE -->
+    <ng-container *ngIf="isEditMode" >
+      <h1 class="title has-text-primary">Edit Comment</h1>
+      <div class="modal-box second">
+      <form #form="ngForm" (ngSubmit)="editCommentText(form, comentDetails!._id)">
+        <div class="field is-grouped">
+          <p class="control is-expanded">
+            <input
+              id="text"
+              class="input has-background-light is-medium"
+              #CommentInput
+              type="text"
+              name="text"
+              placeholder="Your comment"
+              #text="ngModel"
+              ngModel = {{comentDetails?.text}}
+              required
+              minlength="10"
+            />
+          </p>
+
+          <ng-container *ngIf="text.touched">
+            <p
+              style="color: red"
+              class="error"
+              *ngIf="text.errors?.['required']"
+            >
+              The field with your comment is required.
+            </p>
+            <p
+              style="color: red"
+              class="error"
+              *ngIf="text.errors?.['minlength']"
+            >
+              Comment text must be at least 10 characters!
+            </p>
+          </ng-container>
+
+          <p class="control">
+            <button class="button has-text-white space-right" (click)="toggleEditMode(comentDetails!._id)">Cancel</button>
+            <button class="button has-text-white"
+            [disabled]="form.invalid">
+             Submit 
+            </button>
+          </p>
+        </div>
+      </form>
+    </div>
+    </ng-container>
 
       <!-- ADD NEW COMMENT -->
-      <div *ngIf="isLogged">
+      <ng-container *ngIf="!isEditMode">
+      <div *ngIf="isLogged" >
         <h1 class="title">Add new Comment</h1>
 
         <div class="modal-box">
-          <form #form="ngForm" (ngSubmit)="addComment(form)">
+          <form #form="ngForm" (ngSubmit)="addComment(form)" >
             <div class="field is-grouped">
               <p class="control is-expanded">
                 <input
@@ -132,6 +178,7 @@
           </form>
         </div>
       </div>
+    </ng-container>
     </div>
   </div>
 </div>

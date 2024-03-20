@@ -1,5 +1,13 @@
 const { Comment } = require("../models/comment.model");
 
+function getComment(req, res, next) {
+  const {commentId: _id} = req.params;
+
+  Comment.findById(_id)
+    .then((comment) => res.json(comment))
+    .catch(next);
+}
+
 function getComments(req, res, next) {
 
   Comment.find()
@@ -26,59 +34,23 @@ function createComment(req, res, next) {
       .catch(next);
 }
 
-// function editComment(req, res, next) {
-//   const { commentId: _commentId } = req.params;
-//   const { dateAdded, text, commentType, reminderDate } = req.body;
-//   const { _id: _userId } = req.user;
+function editCommentText(req, res, next) {
+  const { _id, text} = req.body;
 
-//   // if the userId is not the same as this one of the comment, the comment will not be updated
-//   Comment.findOneAndUpdate(
-//     { _id: _commentId, userId: _userId },
-//     {
-//       dateAdded: dateAdded,
-//       text: text,
-//       commentType: commentType,
-//       reminderDate: reminderDate,
-//     },
-//     { new: true },
-//   )
-//     .then((updatedComment) => {
-//       if (updatedComment) {
-//         res.status(200).json(updatedComment);
-//       } else {
-//         res.status(401).json({ message: `Not allowed!` });
-//       }
-//     })
-//     .catch(next);
-// }
-
-// function deleteComment(req, res, next) {
-//   const { _commentId, _taskId } = req.params;
-//   const { _id: userId } = req.user;
-
-//   Promise.all([
-//     Comment.findOneAndDelete({ _id: _commentId, _userId }),
-//     User.findOneAndUpdate(
-//       { _id: _userId },
-//       { $pull: { comments: _commentId } },
-//     ),
-//     Task.findOneAndUpdate(
-//       { _id: _taskId },
-//       { $pull: { comments: _commentId } },
-//     ),
-//   ])
-//     .then(([deletedOne, _, __]) => {
-//       if (deletedOne) {
-//         res.status(200).json(deletedOne);
-//       } else {
-//         res.status(401).json({ message: `Not allowed!` });
-//       }
-//     })
-//     .catch(next);
-// }
+  Comment.findOneAndUpdate(
+    { _id: _id },
+    {text}
+  )
+  .then((comment) => {
+    res.status(200).json(comment);
+  })
+  .catch(next);
+}
 
 module.exports = {
+  getComment,
   getComments,
   deleteComment,
   createComment,
+  editCommentText
 };

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Comment } from 'src/app/types/comment';
+import { EditComment } from 'src/app/types/edit-comment';
 import { Task } from 'src/app/types/task';
 import { UserService } from 'src/app/user/user.service';
 
@@ -12,10 +13,13 @@ import { UserService } from 'src/app/user/user.service';
   styleUrls: ['./current-task.component.scss'],
 })
 export class CurrentTaskComponent implements OnInit {
+  isEditMode: boolean = false;
   task: Task | undefined;
   commentsList: Comment[] = [];
   commentsByTaskId: Comment[] = [];
   thereAreNoComments: boolean = false;
+  comentDetails: Comment | undefined;
+
 
   constructor(
     private apiService: ApiService,
@@ -24,6 +28,9 @@ export class CurrentTaskComponent implements OnInit {
     private router: Router
   ) {}
 
+  @ViewChild('form')
+  form!: NgForm;
+
   get isLogged(): boolean {
     return this.userService.isLogged;
   }
@@ -31,6 +38,14 @@ export class CurrentTaskComponent implements OnInit {
   ngOnInit(): void {
     this.fetchTask();
     this.fetchComments();
+  }
+
+  toggleEditMode(_id: string): void {
+    this.isEditMode = !this.isEditMode;
+
+    this.apiService.getComment(_id).subscribe((comment) => {
+      this.comentDetails = comment;
+    });
   }
 
   fetchTask(): void {
@@ -86,6 +101,21 @@ export class CurrentTaskComponent implements OnInit {
      .addComment(commentType, text, _taskId, _userId).subscribe();
      this.router.navigateByUrl("/", {skipLocationChange: true}).then((navigated) => {
       navigated ? this.router.navigate([`/my-tasks/${_taskId}`]) : null;
+    });
+  }
+
+  editCommentText(form: NgForm, _id: string): void {
+    if (form.invalid) {
+      return;
+    }
+      const commentId = this.comentDetails!._id;
+      const {text} = { ...form.value } as Comment;
+   
+      this.apiService.editCommentText(commentId, text).subscribe(() => {
+      this.toggleEditMode(commentId);
+    });
+    this.router.navigateByUrl("/", {skipLocationChange: true}).then((navigated) => {
+      navigated ? this.router.navigate([`/my-tasks/${this.comentDetails!._taskId}`]) : null;
     });
   }
 }

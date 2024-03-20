@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Task } from 'src/app/types/task';
 import { Comment } from 'src/app/types/comment';
+import { EditComment } from './types/edit-comment';
 
 @Injectable({
   providedIn: 'root',
@@ -53,6 +54,11 @@ export class ApiService {
   }
 
   //COMMENTS
+  getComment(id: string) {
+    const { apiUrl } = environment;
+    return this.http.get<Comment>(`${apiUrl}/comments/${id}`);
+  }
+
   getComments() {
     const { apiUrl } = environment;
     return this.http.get<Comment[]>(`${apiUrl}/comments`);
@@ -77,5 +83,10 @@ export class ApiService {
       _taskId,
       _userId      
     });
+  }
+
+  editCommentText(_id: string, text: string) {
+    return this.http
+      .put<Comment>('/api/comments', {_id, text });
   }
 }
