@@ -56,7 +56,7 @@ export class CurrentTaskComponent implements OnInit {
   }
 
   // TASKS
-  deleteTask(): void {
+ deleteTask(): void {
     const _id = this.activatedRout.snapshot.params['taskId'];
     this.apiService.deleteTask(_id);
     this.router.navigate([`/my-tasks`]);

@@ -56,4 +56,11 @@ export class AllTasksComponent {
       navigated ? this.router.navigate([`/tasks`]) : null;
     });
   }
+
+  deleteTask(taskId: string): void {
+    this.apiService.deleteTask(taskId);
+    this.router.navigateByUrl("/", {skipLocationChange: true}).then((navigated) => {
+      navigated ? this.router.navigate([`/tasks`]) : null;
+    });
+  }
 }

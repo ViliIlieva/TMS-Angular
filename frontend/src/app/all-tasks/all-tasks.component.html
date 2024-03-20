@@ -67,7 +67,8 @@
             <p>{{task.taskType}}</p>
             <button id="done"
             textBtn="done"
-            >Close</button>
+            (click)="deleteTask(task._id)"
+            >Delete</button>
           </li>
         </ul>
       </article>
