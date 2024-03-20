@@ -51,6 +51,9 @@ export class AllTasksComponent {
       }else if (status === "codeReview") {
         status = "done";
       }
-    this.apiService.editTaskStatus(taskId, status);
+    this.apiService.editTaskStatus(taskId, status).subscribe();
+    this.router.navigateByUrl("/", {skipLocationChange: true}).then((navigated) => {
+      navigated ? this.router.navigate([`/tasks`]) : null;
+    });
   }
 }

@@ -32,7 +32,7 @@ function editTaskStatus(req, res, next){
   const { taskId, status} = req.body;
 
   Task.findOneAndUpdate(
-    { _taskId: taskId },
+    { _id: taskId },
     {status }
   )
   .then((task) => {

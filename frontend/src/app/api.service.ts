@@ -40,10 +40,10 @@ export class ApiService {
   }
 
   editTaskStatus(taskId: string, status: string){
-    console.log(taskId, status)
+    console.log(`api.service: ${taskId}, ${status}`)
     const { apiUrl } = environment;
     return this.http
-    .put<Task>('/api/tasks', {taskId, status});
+    .put<Task>(`/api/tasks`, {taskId, status});
   }
 
   deleteTask(taskId: string){

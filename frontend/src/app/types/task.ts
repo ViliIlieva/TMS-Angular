@@ -6,6 +6,5 @@ export interface Task {
   taskText: string;
   status: string;
   taskType: string;
-  comments: string[] | Comment[];
   _userId: string;
 }
