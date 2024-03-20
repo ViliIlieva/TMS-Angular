@@ -59,25 +59,24 @@ export class ApiService {
     return this.http.get<Comment[]>(`${apiUrl}/comments`);
   }
   deleteComment(id: string) {
-    const { apiUrl } = environment;
     return this.http
     .delete(`/api/comments/${id}`)
     .subscribe();
   }
 
   addComment(
+    commentType: string,
+    text: string,
     _taskId: string,
     _userId: string,
-    text: string,
-    commentType: string,
   ) {
     const { apiUrl } = environment;
     return this.http
     .post<Comment>(`${apiUrl}/comments`, {
-      _taskId,
-      _userId,
-      text,
       commentType,
+      text,
+      _taskId,
+      _userId      
     });
   }
 }

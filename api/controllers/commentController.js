@@ -18,10 +18,10 @@ function deleteComment(req, res, next) {
 
 function createComment(req, res, next) {
   // const { taskId: _taskId } = req.params;
-  const { _taskId, text, commentType, _userId } = req.body;
+  const { commentType, text, _taskId, _userId } = req.body;
   console.log(_taskId,_userId, text, commentType );
 
-    return Comment.create({text, commentType, _userId, _taskId})
+    return Comment.create({commentType, text, _taskId, _userId})
     .then((comment) => {
       res.status(200).send(comment);})
       .catch(next);

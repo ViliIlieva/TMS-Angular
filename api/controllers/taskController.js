@@ -35,8 +35,8 @@ function editTaskStatus(req, res, next){
     { _taskId: taskId },
     {status }
   )
-  .then((x) => {
-    res.status(200).json(x);
+  .then((task) => {
+    res.status(200).json(task);
   })
   .catch(next);
 }

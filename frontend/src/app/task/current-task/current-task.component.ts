@@ -79,11 +79,7 @@ export class CurrentTaskComponent implements OnInit {
     const {text, commentType } = form.value;
 
      this.apiService
-     .addComment(_taskId, text, commentType, _userId).subscribe();
+     .addComment(commentType, text, _taskId, _userId).subscribe();
     // this.router.navigate([`/my-tasks/${_taskId}`]);
-  }
-
-  navigateToCurrentTask(taskId: string): void {
-    this.router.navigate([`/my-tasks/${taskId}`]);
   }
 }
