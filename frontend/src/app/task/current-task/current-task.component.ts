@@ -65,8 +65,12 @@ export class CurrentTaskComponent implements OnInit {
 
   //COMMENTS
   deleteComment(id: string): void {
+    const _taskId = this.activatedRout.snapshot.params['taskId'];
+    
     this.apiService.deleteComment(id);
-    this.router.navigate([`/my-tasks`]);
+    this.router.navigateByUrl("/", {skipLocationChange: true}).then((navigated) => {
+      navigated ? this.router.navigate([`/my-tasks/${_taskId}`]) : null;
+    });
   }
 
   addComment(form: NgForm): void {
@@ -80,6 +84,8 @@ export class CurrentTaskComponent implements OnInit {
 
      this.apiService
      .addComment(commentType, text, _taskId, _userId).subscribe();
-    // this.router.navigate([`/my-tasks/${_taskId}`]);
+     this.router.navigateByUrl("/", {skipLocationChange: true}).then((navigated) => {
+      navigated ? this.router.navigate([`/my-tasks/${_taskId}`]) : null;
+    });
   }
 }

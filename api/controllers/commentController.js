@@ -19,7 +19,6 @@ function deleteComment(req, res, next) {
 function createComment(req, res, next) {
   // const { taskId: _taskId } = req.params;
   const { commentType, text, _taskId, _userId } = req.body;
-  console.log(_taskId,_userId, text, commentType );
 
     return Comment.create({commentType, text, _taskId, _userId})
     .then((comment) => {
