@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Comment } from 'src/app/types/comment';
-import { EditComment } from 'src/app/types/edit-comment';
 import { Task } from 'src/app/types/task';
 import { UserService } from 'src/app/user/user.service';
 
@@ -59,10 +58,10 @@ export class CurrentTaskComponent implements OnInit {
   async fetchComments(): Promise<void> {
     const _id = this.activatedRout.snapshot.params['taskId'];
 
-    await this.apiService.getComments().subscribe((comments) => {
+    this.apiService.getComments().subscribe((comments) => {
       this.commentsList = comments;
       this.commentsByTaskId = this.commentsList.filter(
-        (comment) => comment._taskId === _id,
+        (comment) => comment._taskId === _id
       );
       if (this.commentsByTaskId.length === 0) {
         this.thereAreNoComments = true;
@@ -74,21 +73,13 @@ export class CurrentTaskComponent implements OnInit {
  deleteTask(): void {
     const _id = this.activatedRout.snapshot.params['taskId'];
     this.apiService.deleteTask(_id);
+    this.deleteManyComments();
     this.router.navigate([`/my-tasks`]);
   }
 
 
   //COMMENTS
-  deleteComment(id: string): void {
-    const _taskId = this.activatedRout.snapshot.params['taskId'];
-    
-    this.apiService.deleteComment(id);
-    this.router.navigateByUrl("/", {skipLocationChange: true}).then((navigated) => {
-      navigated ? this.router.navigate([`/my-tasks/${_taskId}`]) : null;
-    });
-  }
-
-  addComment(form: NgForm): void {
+ addComment(form: NgForm): void {
     if (form.invalid) {
       return;
     }
@@ -117,5 +108,20 @@ export class CurrentTaskComponent implements OnInit {
     this.router.navigateByUrl("/", {skipLocationChange: true}).then((navigated) => {
       navigated ? this.router.navigate([`/my-tasks/${this.comentDetails!._taskId}`]) : null;
     });
+  }
+
+  deleteComment(id: string): void {
+    const _taskId = this.activatedRout.snapshot.params['taskId'];
+    
+    this.apiService.deleteComment(id);
+    this.router.navigateByUrl("/", {skipLocationChange: true}).then((navigated) => {
+      navigated ? this.router.navigate([`/my-tasks/${_taskId}`]) : null;
+    });
+  }
+
+  deleteManyComments(): void {
+    this.commentsByTaskId.forEach((comment) => {
+      this.deleteComment(comment._id);
+    })
   }
 }

@@ -41,59 +41,22 @@ function editTaskStatus(req, res, next){
   .catch(next);
 }
 
+// function deleteTask(req, res, next) {
+//   const {taskId: _id} = req.params;
+//      Task.findOneAndDelete({_id})
+//      .then((removedTask) => {
+//         res.status(200).send(removedTask);})
+//     .catch(next);
+// }
+
 function deleteTask(req, res, next) {
   const {taskId: _id} = req.params;
+  
      Task.findOneAndDelete({_id})
      .then((removedTask) => {
         res.status(200).send(removedTask);})
     .catch(next);
 }
-
-// function editTask(req, res, next) {
-//   const { taskId: _taskId } = req.params;
-//   const { taskName } = req.body.taskName;
-//   const { taskText } = req.body.taskText;
-//   const { status } = req.body.status;
-//   const { taskType } = req.body.taskType;
-//   const { _id: _userId } = req.user;
-
-//   // if the userId is not the same as this one of the task, the task will not be updated
-//   Task.findOneAndUpdate(
-//     { _id: _taskId, userId: _userId },
-//     {
-//       taskName: taskName,
-//       createdDate: createdDate,
-//       requiredDate: requiredDate,
-//       description: description,
-//       status: status,
-//       taskType: taskType,
-//       nextActionDate: nextActionDate,
-//     },
-//     { new: true },
-//   )
-//     .then((updatedTask) => {
-//       if (updatedTask) {
-//         res.status(200).json(updatedTask);
-//       } else {
-//         res.status(401).json({ message: `Not allowed!` });
-//       }
-//     })
-//     .catch(next);
-// }
-
-// function subscribe(req, res, next) {
-//   const _taskId = req.params.taskId;
-//   const { _id: _userId } = req.user;
-//   Task.findByIdAndUpdate(
-//     { _id: _taskId },
-//     { $addToSet: { assignedTo: _userId } },
-//     { new: true },
-//   )
-//     .then((updatedTask) => {
-//       res.status(200).json(updatedTask);
-//     })
-//     .catch(next);
-// }
 
 module.exports = {
   getTasks,

@@ -36,6 +36,7 @@ function createComment(req, res, next) {
 
 function editCommentText(req, res, next) {
   const { _id, text} = req.body;
+  console.log(_id, text);
 
   Comment.findOneAndUpdate(
     { _id: _id },
