@@ -1,20 +1,20 @@
 [
   {
-    "username": "Petar",
-    "tasks": "[{3q2w3e}]",
-    "comments": "[{00tyu}, {01tyu}]",
+    "username": "petar",
     "password": "petar",
-    "_userId": "t1y2u3",
     "email": "petar@abv.bg",
     "tel": "0898777777"
   },
   {
     "username": "admin",
-    "tasks": "[{2q2w3e}]",
-    "comments": "02tyu",
     "password": "admin",
-    "_userId": "t1y2u4",
     "email": "admin@abv.bg",
     "tel": "0898755777"
+  },
+  {
+    "username": "test1",
+    "password": "12345",
+    "email": "test1@abv.bg",
+    "tel": "0899987345"
   }
 ]
