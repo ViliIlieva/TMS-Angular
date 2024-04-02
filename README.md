@@ -1,27 +1,54 @@
 # TMSAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.8.
+This project was generated with [Angular CLI]
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Go to `cd frontend` and Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Go to `cd api` and Run `npm start`to build the project.
 
-## Running unit tests
+## Public and Private parts
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+In `user.service.ts` we check if user is Logged and use this in HTML with *ngIf
 
-## Running end-to-end tests
+## 4 (Four) different dynamic pages 
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+/tasks
+/my-tasks
+/my-tasks/65f948e7255dc3fea8b683fc this is current-task
+/add-task
+/profile - here we can edit profile
 
-## Further help
+## Specific pages 
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+/tasks here are all tasks from database with details
+
+## Communicate to a remote service 
+
+I use MongoDB
+
+## Implement authentication
+
+authenticate.component.ts
+
+## Implement all CRUD operations
+
+In `task module` and in other I have all CRUD operations
+
+##	At least 5 routes
+
+/tasks
+/my-tasks
+/my-tasks/65f948e7255dc3fea8b683fc 
+/add-task
+/profile 
+/home
+/login
+/logout
+/register
+
+
+
