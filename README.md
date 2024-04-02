@@ -50,5 +50,11 @@ In `task module` and in other I have all CRUD operations
 /logout
 /register
 
+## Implement route guards for the private AND the public part
 
+In task-routing.modules.ts is implementing
+
+## Apply error handling and data validation 
+
+In core module are errors and in html are validations
 

@@ -31,7 +31,6 @@ const routes: Routes = [
   {
     path: 'tasks',
     component: AllTasksComponent,
-    // canActivate: [AuthActivate],
   },
 ];
 
